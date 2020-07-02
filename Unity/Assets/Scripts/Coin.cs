@@ -10,7 +10,7 @@ public class Coin : MonoBehaviour
     void Start()
     {
         rb = GetComponent<Rigidbody>();
-        m_EulerAngleVelocity = new Vector3(0, 100, 0);
+        m_EulerAngleVelocity = new Vector3(100, 0, 0);
     }
 
     // Update is called once per frame
@@ -23,6 +23,13 @@ public class Coin : MonoBehaviour
 
         Quaternion deltaRotation = Quaternion.Euler(m_EulerAngleVelocity * Time.deltaTime);
         rb.MoveRotation(rb.rotation * deltaRotation);
+
+    }
+    
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.gameObject.CompareTag("Player")) 
+        Destroy(this.gameObject);
 
     }
 }
